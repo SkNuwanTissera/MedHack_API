@@ -1,36 +1,26 @@
 'use strict';
-
 const bodyParser = require('body-parser');
 const express = require('express');
-
+const mongoose = require('mongoose');
+require('./config/database');
 
 var app = express();
 
-//load models
-require('./models/user.model');
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true})); // to get information from html forms
+app.use('/', express.static(__dirname + '/'))
 
-
-
+//Routes
 const UserRouter = require('./routes/user.route');
 const visionRouter = require('./routes/vision.route');
 
-// Init App
+app.use('/api/v1/vision',visionRouter);
+app.use('/api/v1/users',UserRouter);
 
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true})); // to get information from html forms
-
-app.use('/', express.static(__dirname + '/'))
-
-
-
-app.use('/api/users', UserRouter);
-
-
-app.get('/', (req, res, next) => {
+app.get('/api/v1/', (req, res, next) => {
     res.sendFile('index.html');
 });
-
 
 app.listen(6600, err => {
     if (err) {
@@ -39,7 +29,3 @@ app.listen(6600, err => {
     }
     console.log('app listening on port 6600');
 });
-
-app.get('/vision',visionRouter.callVision);
-//for unit testing
-module.exports = app;
