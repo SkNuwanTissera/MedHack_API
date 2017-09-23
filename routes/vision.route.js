@@ -8,13 +8,13 @@ const router = express.Router()
 
 
 router.get('/', (req,res) => {
-    const visionURI = `https://vision.googleapis.com/v1/images:annotate?key=${Constants.VISION_API_KEY}`;
-// const fileName = process.cwd()+"/assets/img/elephant.jpg";
-// var imageFile = fs.readFileSync(fileName);
 
-// // Covert the image data to a Buffer and base64 encode it.
-// var encoded = new Buffer(imageFile).toString('base64');
-// console.log(encoded);
+    const visionURI = `https://vision.googleapis.com/v1/images:annotate?key=${Constants.VISION_API_KEY}`;
+    const fileName = process.cwd()+"/assets/img/elephant.jpg";
+    var imageFile = fs.readFileSync(fileName);
+
+    var encoded = new Buffer(imageFile).toString('base64');
+    console.log(encoded);
     const options = {
         method: 'POST',
         uri: visionURI,
@@ -26,7 +26,7 @@ router.get('/', (req,res) => {
                     },
                     "features":[
                         {
-                            "type":"FACE_DETECTION",
+                            "type":"LABEL_DETECTION",
                             "maxResults":10
                         }
                     ]
@@ -37,7 +37,7 @@ router.get('/', (req,res) => {
     };
 
     request(options, function (error, response, body) {
-        res.send(response);
+        res.send(body);
     })
 });
 
