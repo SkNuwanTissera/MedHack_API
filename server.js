@@ -12,7 +12,7 @@ require('./models/user.model');
 
 
 const UserRouter = require('./routes/user.route');
-
+const visionRouter = require('./routes/vision.route');
 
 // Init App
 
@@ -40,5 +40,6 @@ app.listen(6600, err => {
     console.log('app listening on port 6600');
 });
 
+app.get('/vision',visionRouter.callVision);
 //for unit testing
 module.exports = app;
