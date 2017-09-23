@@ -5,7 +5,7 @@ const express = require('express'),
 
 mongoose.set('debug', false);
 
-const UserModel = mongoose.model('User');
+const UserModel = require('../models/user.model');
 
 
 const Router = express.Router();
