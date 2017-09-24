@@ -22,10 +22,10 @@ app.get('/api/v1/', (req, res, next) => {
     res.sendFile('index.html');
 });
 
-app.listen(6600, err => {
+app.listen(8080, err => {
     if (err) {
         console.error(err);
         return;
     }
-    console.log('app listening on port 6600');
+    console.log('app listening on port 8080');
 });

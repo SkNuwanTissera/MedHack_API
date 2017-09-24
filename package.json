@@ -10,6 +10,7 @@
     "express": "^4.15.4",
     "mongoose": "^4.11.12",
     "nodemon": "^1.12.1",
+    "pusher": "^1.5.1",
     "request": "^2.82.0"
   },
   "scripts": {
